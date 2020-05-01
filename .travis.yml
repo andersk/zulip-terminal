@@ -12,7 +12,9 @@ matrix:
     - python: 3.7
       name: "Linting - PEP8 & more (flake8)"
       install: pip3 install .[linting]
-      script: flake8
+      script: |
+        files="$(tools/lister.py -f py)" &&
+        xargs -d '\n' flake8 <<< "$files"
     - python: 3.5
       name: "Linting - import order (isort)"
       install: pip3 install .[linting]
